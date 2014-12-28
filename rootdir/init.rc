@@ -10,11 +10,6 @@ import /init.${ro.hardware}.rc
 import /init.${ro.zygote}.rc
 import /init.trace.rc
 
-    # su daemon
-service su_daemon /system/xbin/su --daemon
-    class main
-    oneshot
-
 on early-init
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_score_adj -1000
@@ -336,9 +331,6 @@ on post-fs-data
     #setprop vold.post_fs_data_done 1
 
 on boot
-    # start su_daemon
-    start su_daemon
-
     # basic network init
     ifup lo
     hostname localhost
